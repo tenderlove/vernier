@@ -189,8 +189,8 @@ module Vernier
           @filenames = filenames.map do |filename|
             @strings[filename]
           end
-          @frame_categories = filenames.map do |filename|
-            @categorizer.categorize(filename)
+          @frame_categories = filenames.zip(lines).map do |filename, line|
+            line == -1 ? @categorizer.jit_category : @categorizer.categorize(filename)
           end
         end
 
